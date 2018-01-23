@@ -7,7 +7,9 @@
 //
 
 #include <stdio.h>
-
+//思路: 数组c表示栈中的元素，默认元素为a[0],长度为1
+// 当c中栈顶元素等于b中元素的时候，出栈， 不等于则入栈
+// 当c的长度为0时，表示满足条件，否则不满足
 int main(int argc, const char * argv[]) {
     char a[9],b[9],c[9];
     int len;
