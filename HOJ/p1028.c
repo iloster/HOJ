@@ -7,7 +7,7 @@
 //
 
 #include <stdio.h>
-
+// 母函数
 
 int main(int argc, const char * argv[]) {
     int n = 0;
