@@ -7,48 +7,29 @@
 //
 
 #include <stdio.h>
-int g(int n);
-// 0的个数
-int f(int n) {
-    if (n <= 2) {
-        return 1;
-    } else if (n == 3) {
-        return 2;
-    }
-    return f(n - 1) + g(n - 1);
-}
-
-int f1(int n) {
-    if(n  == 1) {
-        return 0;
-    } else if (n == 2) {
-        return 0;
-    } else if (n == 3) {
-        return 1;
-    }
- 
-    if((n-1)%2 == 1) {
-        return 2*f(n - 1) ;
-    }
-    return 2*f(n - 1) - 1;
-    
-}
-
-int g(int n) {
-    if (n < 3) {
-        return 0;
-    } else if (n == 3) {
-        return 1;
-    }
-    if(n%2 == 1) {
-        return f(n);
-    }
-    return f(n) - 1;
-}
-
+int O[1010][100];
+int Z[1010][100];
 int main(int argc, const char * argv[]) {
-    int step = 0;
-    while(scanf("%d", &step) != EOF) {
-        printf("%d\n",f(step - 1) + g(step - 1));
+    int i,j;
+    O[0][0] = O[1][0] = 1;
+    for(i = 2; i< 1001; i++) {
+        for(j = 0; j < 100; j++) {
+            O[i][j] += O[i-1][j] + O[i-1][j];
+            Z[i][j] += O[i-2][j] + Z[i-2][j];
+            O[i][j+1] += O[i][j]/10000;
+            O[i][j] %= 10000;
+            Z[i][j+1] += Z[i][j]/10000;
+            Z[i][j] %= 10000;
+        }
     }
+    int step;
+    while(scanf("%d",&step) != EOF) {
+        int end = 99;
+        while ( end > 0 && !Z[step][end] ) -- end;
+        printf("%d",Z[step][end --]);
+        while ( end >= 0 )
+            printf("%04d",Z[step][end --]);
+        printf("\n");
+    }
+    return 0;
 }
