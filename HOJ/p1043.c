@@ -44,7 +44,7 @@ void bfs(int col, int row) {
     
     while(isOk() && Size != 0) {
         if( i >= 0 && j >= 0 && i < 3 && j <3 && record[i][j] == 0) {
-            
+            Size++;
         }
     }
 }
