@@ -24,6 +24,18 @@ void solve(int n, int w) {
     printf("%d\n", dp[w]);
 }
 
+void solve1(int n, int w) {
+    int dp[1010] = {0};
+    int i,j;
+    for(i = 0; i < n; i++) {
+        for(j = weight[i]; j <= w; j++) {
+            if((dp[j - weight[i]] + v[i]) > dp[j]) {
+                dp[j] = dp[j - weight[i]] + v[i];
+            }
+        }
+    }
+    printf("%d\n", dp[w]);
+}
 
 int main(int argc, const char * argv[]) {
     int i,j;
@@ -37,7 +49,7 @@ int main(int argc, const char * argv[]) {
         for(j = 0; j < n; j++) {
             scanf("%d", &weight[j]);
         }
-        solve(n, w);
+        solve1(n, w);
     }
     return 0;
 }
