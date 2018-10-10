@@ -33,18 +33,31 @@ void print(int len) {
     printf("\n");
 }
 
-void bfs(int col, int row) {
-    int i = col;
-    int j = row;
+void bfs(int i, int j) {
     struct Node node;
-    node.i = col;
-    node.j = row;
+    node.i = i;
+    node.j = j;
     Nodes[Size] = node
     Size++;
-    
-    while(isOk() && Size != 0) {
-        if( i >= 0 && j >= 0 && i < 3 && j <3 && record[i][j] == 0) {
+    int col,row;
+    while(Size) {
+        row = Nodes[Size].x;
+        col = Nodes[Size].y
+        if( col + 1 >= 0  && col+1 < 3  && record[row][col + 1] == 0) {
+            Size++;
             
+        }
+        
+        if( col - 1 >= 0  && col-1 < 3 && record[row][col -1] == 0) {
+            Size++;
+        }
+        
+        if( row+1 >= 0  && row+1 < 3 && record[row + 1][col] == 0) {
+            Size++;
+        }
+        
+        if(row-1 >= 0 && row-1 <3 && record[row-1][col] == 0) {
+            Size++;
         }
     }
 }
