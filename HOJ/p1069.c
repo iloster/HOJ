@@ -7,76 +7,69 @@
 //
 
 #include <stdio.h>
-int a[180][3];
+#include <stdlib.h>
+int dp[200]; // dp[i]以第i个为起点的最高  dp[i+1] = max{dp[i] + block[i+1], dp[i+1]}
+
+struct block {
+    int x;
+    int y;
+    int z;
+}blocks[200];
+
+
+int cmp(const void *p1, const void *p2) {
+    struct block block1 = *(struct block *) p1;
+    struct block block2 = *(struct block *) p2;
+    if(block1.x == block2.x) {
+        if(block1.y == block2.y) {
+            return block1.z - block2.z;
+        }
+        return block1.y - block2.y;
+    }
+    return block1.x - block2.x;
+}
+
 int main(int argc, const char * argv[]) {
     int line;
-    int i, j, k;
+    int a, b, c;
+    int n = 0;
     while (scanf("%d", &line) != EOF) {
-        k = 0;
-        for(i = 0; i < line; i++) {
-            for(j = 0; j < 3; j++) {
-                scanf("%d", &a[k][j]);
-            }
-            
-            a[k + 1][0] = a[k][0];
-            a[k + 1][1] = a[k][2];
-            a[k + 1][2] = a[k][1];
-            
-            a[k + 2][0] = a[k][1];
-            a[k + 2][1] = a[k][2];
-            a[k + 2][2] = a[k][0];
-            
-            a[k + 3][0] = a[k][1];
-            a[k + 3][1] = a[k][0];
-            a[k + 3][2] = a[k][2];
-            
-            a[k + 4][0] = a[k][2];
-            a[k + 4][1] = a[k][1];
-            a[k + 4][2] = a[k][0];
-            
-            a[k + 5][0] = a[k][2];
-            a[k + 5][1] = a[k][0];
-            a[k + 5][2] = a[k][1];
-            
-            k += 6;
+        if(line == 0) {
+            break;
         }
-        int m,n = 0;
-        int c, ku, g;
-        for(m = 0; m < k; m++) {
-            for(n = m + 1; n < (k-1); n++) {
-                if(a[m][2] < a[n][2]) {
-                    c = a[m][0];
-                    a[m][0] = a[n][0];
-                    a[n][0] = c;
-
-                    ku = a[m][1];
-                    a[m][1] = a[n][1];
-                    a[n][1] = ku;
-
-                    g = a[m][2];
-                    a[m][2] = a[n][2];
-                    a[n][2] = g;
-                }
-            }
+        int k = 0;
+        n++;
+        for(int i = 0; i < line; i++) {
+            scanf("%d%d%d", &a, &b, &c);
+            blocks[k].x = a; blocks[k].y = b; blocks[k].z = c; k++;
+            blocks[k].x = a; blocks[k].z = b; blocks[k].y = c; k++;
+            blocks[k].y = a; blocks[k].x = b; blocks[k].z = c; k++;
+            blocks[k].y = a; blocks[k].z = b; blocks[k].x = c; k++;
+            blocks[k].z = a; blocks[k].x = b; blocks[k].y = c; k++;
+            blocks[k].z = a; blocks[k].y = b; blocks[k].x = c; k++;
         }
-
-        int dp[180] = {0};
-//        int o = 0;
-        for(j = 0; j < k; j++) {
-            dp[j] = a[j][2];
-            for(int o = 1; o < j; o++) {
-                if(a[o][0] < a[j][0] && a[o][1] < a[j][1] && dp[j] < (dp[o] + a[o][2])) {
-                    dp[j] = dp[o] + a[o][2];
-                }
-            }
-        }
+        // 排序 先x  再y  再z
+        qsort(blocks, k, sizeof(struct block), cmp);
+        
+        // 贪心算法
         int max = 0;
-        for(j = 0; j < 180; j++) {
-            if(dp[j] >= max) {
-                max = dp[j];
+//        int width, height;
+        dp[0] = 0;
+        for(int i = 0; i < line*6; i++) {
+            dp[i] = blocks[i].z;
+            for(int j = 0; j < i; j++) {
+                if(blocks[i].x > blocks[j].x && blocks[i].y > blocks[j].y
+                   && dp[i] < (dp[j] + blocks[i].z)) {
+                    dp[i] = dp[j] + blocks[i].z;
+//                    printf("i = %d  j= %d\n" ,i, j);
+                    if(max <= dp[i]) {
+                        max = dp[i];
+                    }
+                }
             }
         }
-        printf("Case %d: maximum height = %d\n", line, max);
+        
+        printf("Case %d: maximum height = %d\n", n, max);
         
     }
     return 0;
