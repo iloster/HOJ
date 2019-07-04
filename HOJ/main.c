@@ -1,47 +1,68 @@
 //
 //  main.c
-//  ZOJ
+//  HOJ
 //
-//  Created by dev on 2018/1/19.
-//  Copyright © 2018年 dev. All rights reserved.
+//  Created by cheng on 2019/5/13.
+//  Copyright © 2019 dev. All rights reserved.
 //
 
 #include <stdio.h>
 
-//int gcd(int a, int b) {
-//    int c = 0;
-//    if (a < b) {
-//        c = a;
-//        a = b;
-//        b = c;
-//    }
-//    if (a%b != 0) {
-//        return gcd(b, a%b);
-//    } else {
-//        return b;
-//    }
-//}
+int n;
+int visit[15][15];
+int num ;
+// x, y 为当前位置
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-//    int T;
-//    int n,b,i;
-//    int ret;
-//    scanf("%d",&T);
-//    while(T--) {
-//        scanf("%d", &n);
-//        ret = 1;
-//        for(i = 1; i <= n; i++) {
-//            scanf("%d", &b);
-////            printf("b=%d\n",b);
-//            ret = b/gcd(b,ret)*ret;
-//        }
-//        printf("%d\n",ret);
-//    }
-    int a, b;
-    while(scanf("%d%d", &a, &b) != EOF) {
-        printf("%d\n", a+b);
+int check(int x, int y) {
+    //水平线
+    for(int i = 0; i < n; i++) {
+        if(visit[i][y] && x != i) {
+            return 0;
+        }
     }
-    return 0;
+    for(int i = 0; i < n; i++) {
+        if(visit[x][i] && y != i) {
+            return 0;
+        }
+    }
+    // 斜线
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(i != x && j != y && abs(i - x) == abs(j - y) && visit[i][j]) {
+                return 0;
+            }
+        }
+    }
+    
+    return 1;
 }
 
+
+void dfs(int depth) {
+    if(depth == n) {
+        num++;
+        return;
+    }
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(!visit[i][j] && check(i, j)) {
+                visit[i][j] = 1;
+                dfs(depth + 1);
+                visit[i][j] = 0;
+            }
+        }
+    }
+}
+
+int main(int argc, char * argv[]) {
+    while(scanf("%d", &n)) {
+        if(n == 0) {
+            break;
+        }
+        dfs(0);
+        printf("%d\n", num);
+    }
+    
+    return 0;
+}
