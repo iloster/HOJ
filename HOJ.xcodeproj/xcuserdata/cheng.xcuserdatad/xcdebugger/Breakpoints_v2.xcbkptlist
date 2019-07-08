@@ -480,7 +480,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HOJ/p1031.c"
-            timestampString = "583930602.055459"
+            timestampString = "584010877.15413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
@@ -496,7 +496,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HOJ/p1031.c"
-            timestampString = "583930602.055934"
+            timestampString = "584010877.154192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
@@ -512,7 +512,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HOJ/p1031.c"
-            timestampString = "583930602.056262"
+            timestampString = "584010877.154236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -524,15 +524,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HOJ/p1031.c"
-            timestampString = "583930602.056594"
+            filePath = "HOJ/p1052.c"
+            timestampString = "584250567.114035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "main()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HOJ/p1087.c"
+            timestampString = "584262325.302631"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
