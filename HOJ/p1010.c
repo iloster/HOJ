@@ -1,13 +1,14 @@
 //
 //  p1010.c
 //  HOJ
-//
+//  深搜
 //  Created by cheng on 2019/5/8.
 //  Copyright © 2019 dev. All rights reserved.
 //
 
 #include <stdio.h>
 #include<math.h>
+
 char maze[10][10];
 int visit[10][10];
 int startX = 0, startY = 0, endX = 0, endY = 0;
